@@ -1,1 +1,1 @@
-# Graph-Theory-Implementations
+# Graph Theory Implementations
