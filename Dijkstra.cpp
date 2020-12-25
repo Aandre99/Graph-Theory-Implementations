@@ -6,17 +6,31 @@
 
 using namespace std;
 
+//definitions -> pair<vertex,distance>
+
 typedef pair<int,double> vertex;
 typedef vector<vertex> Adj;
 typedef vector<Adj> Graph;
 
+//customized comparer to order priority queue by sencond element (distance)
+//  use -> priority_queue<vertex,vector<vertex>,myComp>
 
+struct myComp { 
+	constexpr bool operator()( 
+		vertex const& a, 
+		vertex const& b) 
+		const noexcept 
+	{ 
+		return a.second > b.second; 
+	} 
+};
+
+//useful funcition
 Graph add_edge(Graph G, int v1,int v2, double weight){
     
     G[v1].push_back(make_pair(v1,weight));
     return G;
 }
-
 void show_graph(Graph G){
 
     int i, j;
@@ -27,6 +41,10 @@ void show_graph(Graph G){
         }
         printf("\n");
     }
+}
+
+//dijkstra algorithm function
+void Dijkstra(Graph G, int source, int destiny){ 
 }
 
 int main(){
