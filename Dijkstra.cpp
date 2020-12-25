@@ -12,7 +12,7 @@ typedef pair<int,double> vertex;
 typedef vector<vertex> Adj;
 typedef vector<Adj> Graph;
 
-//customized comparer to order priority queue by sencond element (distance)
+//custom comparator for order priority queue per sencond element (distance)
 //  use -> priority_queue<vertex,vector<vertex>,myComp>
 
 struct myComp { 
