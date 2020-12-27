@@ -36,8 +36,8 @@ void show_graph(Graph G){
     int i, j;
     for (i = 0; i < G.size(); i++){
         printf("[%d] -> ", i+1);
-        for (j = 0; j < G[i].size() ; j++){
-            printf("(%d,%.2lf) -> ", G[i][j].first+1, G[i][j].second );
+        for(vertex v:G[i]){
+            printf("(%d,%.2lf) -> ", v.first+1, v.second );
         }
         printf("\n");
     }
@@ -117,5 +117,7 @@ int main(){
     scanf("%d", &end);
     
     Dijkstra(graph,begin,end);
+
+    show_graph(graph);
     return 0;
 }
