@@ -7,8 +7,9 @@
 #include <tuple>
 using namespace std;
 
+// Definitions
+
 int* previous;
-//definitions -> pair<vertex,distance>
 
 typedef pair<int,double> vertex;
 typedef vector<vertex> Adj;
@@ -23,6 +24,8 @@ struct myComp {
 		return a.second > b.second; 
 	} 
 };
+
+// userful functions
 
 void show_graph(Graph G){
 
@@ -40,6 +43,8 @@ Graph add_edge(Graph G, int v1,int v2, double weight){
     G[v1].push_back(make_pair(v2,weight));
     return G;
 }
+
+// Prim algorithm
 
 double Prim(Graph G, int v_start){
 
@@ -82,6 +87,7 @@ double Prim(Graph G, int v_start){
     }
 
     double min_cost = 0.0;
+    // compute cost of generator tree
     for (i=0;i<G.size();i++)
     {
         min_cost += cost[i];
