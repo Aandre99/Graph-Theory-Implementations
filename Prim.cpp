@@ -24,11 +24,6 @@ struct myComp {
 	} 
 };
 
-struct solution{
-    int* cost;
-    int* generator_tree;
-};
-
 void show_graph(Graph G){
 
     int i, j;
