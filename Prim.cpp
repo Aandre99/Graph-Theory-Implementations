@@ -4,9 +4,10 @@
 #include <stdlib.h>
 #include <queue>
 #include <limits>
-
+#include <tuple>
 using namespace std;
 
+int* previous;
 //definitions -> pair<vertex,distance>
 
 typedef pair<int,double> vertex;
@@ -21,6 +22,11 @@ struct myComp {
 	{ 
 		return a.second > b.second; 
 	} 
+};
+
+struct solution{
+    int* cost;
+    int* generator_tree;
 };
 
 void show_graph(Graph G){
@@ -40,59 +46,68 @@ Graph add_edge(Graph G, int v1,int v2, double weight){
     return G;
 }
 
-void Prim(Graph G, int v_start){
+double Prim(Graph G, int v_start){
 
-    int visited[G.size()],previous[G.size()];
-    double coust[G.size()];
+    int visited[G.size()];
+    double cost[G.size()];
     int i,v;
 
     for (v=0;v < G.size();v++)
     {
         visited[v] = 0;
-        previous[v] = -1; 
-        coust[v] = INT16_MAX / 2;
+        *(previous + v) = -1; 
+        cost[v] = INT16_MAX / 2;
     }
 
+    cost[v_start] = 0;
+    *(previous + v_start) = v_start;
 
     priority_queue<vertex,Adj,myComp> Q;
-    Q.push(make_pair(v_start,0));
+
+    Q.push(make_pair(v_start,cost[v_start]));
 
     while (!Q.empty())
     {
         vertex u = Q.top();
         Q.pop();
+        visited[u.first] = 1;
 
         for(vertex v:G[u.first])
         {
             if (!visited[v.first])
             {
-                if(coust[v.first] > v.second)
+                if(cost[v.first] > v.second)
                 {
-                    coust[v.first] = v.second;
-                    previous[v.first] = u.first;
+                    cost[v.first] = v.second;
+                    *(previous + v.first) = u.first;
+                    Q.push(make_pair(v.first,cost[v.first]));
                 }
             }
         }
     }
 
-
-    for(v=0;v < G.size();v++)
+    double min_cost = 0.0;
+    for (i=0;i<G.size();i++)
     {
-        printf(" %d ", previous[v]);
+        min_cost += cost[i];
     }
+    return min_cost;
 }
 
 int main(){
 
     int n_vertices,n_edges;
     int i,v1,v2,v_start;
-    double w;
+    int* generator_tree = NULL;
+
+    double w,min_cost = 0.0;
     Graph graph;
 
     scanf("%d", &n_vertices);
     scanf("%d", &n_edges);
 
     graph.resize(n_vertices);
+    previous = (int*)malloc(n_vertices * sizeof(int));
 
     for(i=0;i<n_edges;i++)
     {
@@ -102,9 +117,16 @@ int main(){
     }
 
     scanf("%d",&v_start);
-    
-    show_graph(graph);
-    Prim(graph,v_start);
+    min_cost = Prim(graph,v_start);
+
+    printf("The generator tree is: \n");
+    for (i=0;i<n_vertices;i++)
+    {
+        printf(" %d ", *(previous+i));
+    }
+    printf("\nThe minimum cost of generator tree is: %.lf\n", min_cost);
+
+    free(previous);
     return 0;
 }
 
