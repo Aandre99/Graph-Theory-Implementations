@@ -9,16 +9,16 @@ typedef vector<vertex> Adj;
 
 class Graph{
     private:
-        vector<Adj> Adj_matrix;
+        vector<Adj> Adj_list;
         int size;
     public:
         
         void creat_graph(int n_vertices){
-            this->Adj_matrix.resize(n_vertices);
+            this->Adj_list.resize(n_vertices);
             this->size = n_vertices;
         }
         void add_edge(int v1,int v2,double w){
-            this->Adj_matrix[v1].push_back(make_pair(v2,w));
+            this->Adj_list[v1].push_back(make_pair(v2,w));
         }
         void show_graph(){
 
@@ -27,7 +27,7 @@ class Graph{
             for(i = 0; i < this->size ; i++)
             {
                 printf("[%d]-> ", i);
-                for( vertex v:this->Adj_matrix[i])
+                for( vertex v:this->Adj_list[i])
                 {
                     printf("(%d , %.2lf)-> ", v.first,v.second);
                 }
