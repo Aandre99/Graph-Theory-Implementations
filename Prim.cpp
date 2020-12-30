@@ -56,7 +56,7 @@ double Prim(Graph G, int v_start){
     {
         visited[v] = 0;
         *(previous + v) = -1; 
-        cost[v] = INT16_MAX / 2;
+        cost[v] = INT16_MAX;
     }
 
     cost[v_start] = 0;
@@ -65,7 +65,6 @@ double Prim(Graph G, int v_start){
     priority_queue<vertex,Adj,myComp> Q;
 
     Q.push(make_pair(v_start,cost[v_start]));
-
     while (!Q.empty())
     {
         vertex u = Q.top();
@@ -86,11 +85,14 @@ double Prim(Graph G, int v_start){
         }
     }
 
+     printf("ola2");
+
     double min_cost = 0.0;
     // compute cost of generator tree
     for (i=0;i<G.size();i++)
     {
-        min_cost += cost[i];
+        if (cost[i] != INT16_MAX){
+        min_cost += cost[i];}
     }
     return min_cost;
 }
@@ -116,7 +118,9 @@ int main(){
         graph = add_edge(graph,v1,v2,w);
         graph = add_edge(graph,v2,v1,w);
     }
-
+    printf("\n\n");
+    show_graph(graph);
+    printf("\n\n");
     scanf("%d",&v_start);
     min_cost = Prim(graph,v_start);
 
@@ -126,7 +130,6 @@ int main(){
         printf(" %d ", *(previous+i));
     }
     printf("\nThe minimum cost of generator tree is: %.lf\n", min_cost);
-
     free(previous);
     return 0;
 }

@@ -118,6 +118,6 @@ int main(){
     
     Dijkstra(graph,begin,end);
 
-    show_graph(graph);
+    //show_graph(graph);
     return 0;
 }
