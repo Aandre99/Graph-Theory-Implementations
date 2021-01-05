@@ -8,6 +8,7 @@ typedef pair<int,double> vertex;
 typedef vector<vertex> Adj;
 
 class Graph{
+    
     private:
         vector<Adj> Adj_list;
         int size;

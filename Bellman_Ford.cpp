@@ -100,6 +100,7 @@ class Graph{
             this->show_all_paths(v0,path);
         }
 };
+
 int main()
 {
     int n_vertices, n_edges;
