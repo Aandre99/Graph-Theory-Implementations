@@ -129,7 +129,7 @@ int main(){
     scanf("%d",&v_start);
     min_cost = graph.execute_prim(v_start);
  
-    printf("The generator tree is: \n");
+    printf("The generator tree is: \n\n");
     for (i=0;i<n_vertices;i++)
     {
         printf(" %d -- %d\n", i,previous[i]);
