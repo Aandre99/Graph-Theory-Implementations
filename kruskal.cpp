@@ -9,7 +9,6 @@
 
 #include <iostream>
 #include <algorithm>
-#include <iomanip>
 #include <vector>
 
 
@@ -122,25 +121,25 @@ public:
 int main()
 {
 	int qnt_vertex, qnt_edges, v1, v2, cost;
-	cout << "Numero de vertices e arestas: ";
+	//cout << "Numero de vertices e arestas: ";
 	cin >> qnt_vertex >> qnt_edges;
 	Graph g(qnt_vertex);
-	cout << "\nAdicione as arestas (vertice1 vertice2 peso):\n\n";
+	//cout << "\nAdicione as arestas (vertice1 vertice2 peso):\n\n";
 	for(int i = 0; i < qnt_edges;++i)
 	{
 		cin >> v1 >> v2 >> cost;
 		g.create_edge(v1, v2, cost);
 	}
 	vector<Edge> mst = g.kruskal();
-	cout << "\nImprimindo MST...\n\n";
-	cout << "ARESTA" << setw(20) << "PESO\n";
+	//cout << "\nImprimindo MST...\n\n";
+	//cout << "ARESTA" << "PESO\n";
 	for(int i = 0; i < qnt_vertex-1; ++i)
 	{
-		cout << mst[i].get_vertex1() << " - "
-			<< mst[i].get_vertex2() << setw(20)
+		cout << mst[i].get_vertex1() << " "
+			<< mst[i].get_vertex2() << " "
 			<< mst[i].get_cost() << endl;
 	}
-	cout << endl;
+	//cout << endl;
 
 	return 0;
 }
