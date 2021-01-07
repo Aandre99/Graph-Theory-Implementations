@@ -88,7 +88,7 @@ class Graph{
                         {
                             cost[v.second] = v.first;
                             *(previous + v.second) = u.second;
-                            Q.push(make_pair(v.first,cost[v.second]));
+                            Q.push(make_pair(cost[v.second],v.second));
                         }
                     }
                 }
@@ -105,9 +105,9 @@ class Graph{
 
 int main(){
 
+
     int n_vertices,n_edges;
     int i,v1,v2,v_start;
-    int* generator_tree = NULL;
 
     double w,min_cost = 0.0;
     Graph graph;
@@ -116,7 +116,8 @@ int main(){
     scanf("%d", &n_edges);
 
     graph.creat_graph(n_vertices);
-    previous = (int*)malloc(n_vertices * sizeof(int));
+
+    previous = (int*)calloc(n_vertices,sizeof(int));
 
     for(i=0;i<n_edges;i++)
     {
@@ -124,6 +125,7 @@ int main(){
         graph.add_edge(v1,v2,w);
         graph.add_edge(v2,v1,w);
     }
+
     scanf("%d",&v_start);
     min_cost = graph.execute_prim(v_start);
  
@@ -134,6 +136,8 @@ int main(){
     }
     printf("\nThe minimum cost of generator tree is: %.lf\n", min_cost);
     free(previous);
+    
+    printf("ola");
     return 0;
 }
 
