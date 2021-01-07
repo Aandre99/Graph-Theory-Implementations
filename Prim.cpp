@@ -132,7 +132,7 @@ int main(){
     printf("The generator tree is: \n");
     for (i=0;i<n_vertices;i++)
     {
-        printf(" %d ", previous[i]);
+        printf(" %d -- %d\n", i,previous[i]);
     }
     printf("\nThe minimum cost of generator tree is: %.lf\n", min_cost);
     free(previous);

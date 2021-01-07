@@ -133,12 +133,20 @@ int main()
 	vector<Edge> mst = g.kruskal();
 	//cout << "\nImprimindo MST...\n\n";
 	//cout << "ARESTA" << "PESO\n";
+
+	double mst_value = 0.0;
+
 	for(int i = 0; i < qnt_vertex-1; ++i)
 	{
 		cout << mst[i].get_vertex1() << " "
 			<< mst[i].get_vertex2() << " "
 			<< mst[i].get_cost() << endl;
+
+		mst_value += mst[i].get_cost();
 	}
+
+	printf("MST minimum value %.2lf", mst_value);
+
 	//cout << endl;
 
 	return 0;
