@@ -121,33 +121,28 @@ public:
 int main()
 {
 	int qnt_vertex, qnt_edges, v1, v2, cost;
-	//cout << "Numero de vertices e arestas: ";
+	cout << "Numero de vertices e arestas: ";
 	cin >> qnt_vertex >> qnt_edges;
 	Graph g(qnt_vertex);
-	//cout << "\nAdicione as arestas (vertice1 vertice2 peso):\n\n";
+	cout << "\nAdicione as arestas (vertice1 vertice2 peso):\n\n";
 	for(int i = 0; i < qnt_edges;++i)
 	{
 		cin >> v1 >> v2 >> cost;
 		g.create_edge(v1, v2, cost);
 	}
 	vector<Edge> mst = g.kruskal();
-	//cout << "\nImprimindo MST...\n\n";
-	//cout << "ARESTA" << "PESO\n";
-
-	double mst_value = 0.0;
-
+	cout << "\nImprimindo MST...\n\n";
+	cout << "ARESTA \t PESO\n";
+	int minimum_cost = 0;
 	for(int i = 0; i < qnt_vertex-1; ++i)
 	{
 		cout << mst[i].get_vertex1() << " "
 			<< mst[i].get_vertex2() << " "
 			<< mst[i].get_cost() << endl;
-
-		mst_value += mst[i].get_cost();
+		minimum_cost += mst[i]. get_cost();
 	}
 
-	printf("MST minimum value %.2lf", mst_value);
-
-	//cout << endl;
+	cout << "\nCusto minimo: " << minimum_cost << endl;
 
 	return 0;
 }
