@@ -26,8 +26,6 @@
 
 using namespace std;
 
-typedef vector<int> children;
-
 class Edge
 {
 private:
