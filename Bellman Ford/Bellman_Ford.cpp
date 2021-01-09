@@ -28,7 +28,7 @@
 #include <iostream>
 #include <vector> 
 #include <utility>
-#include <limits>
+#include <climits>
 #include <math.h>
 
 using namespace std;
@@ -67,27 +67,32 @@ class Graph{
             }
         }
 
-        void show_all_paths(int v0,int path[]){
+        void show_path(int v,int previous [])
+        {
+            if (v == -1){
+                return;
+            }else{
+                show_path(previous[v],previous);
+                printf(" %d ->", v);
+            }
+        }
+        void show_all_paths(int v0,int previous[],double distance[]){
             
-            int i,j, n = this->size;
+            int i, n = this->size;
 
-            for (i = n-1 ; i >= 0; i--)
+            for (i = 0; i< n; i++)
             {
-                printf("Minimum Path %d to %d vertex", i,v0);
-                printf("\n%d ->", i);
-                j = i;
-
-                while(1)
-                {
-                    if(path[j] != -1)
-                    {
-                        j = path[j];
-                        printf(" %d ->", j);
-                    }else{
-                        break;
-                    }
-                }
-                printf("\n");
+               printf("Caminho Minimo entre %d e %d,", v0,i);
+               
+               if (distance[i] == 2147483647.00){printf("com custo INF\n");}
+               else{printf("com custo %.2lf\n",distance[i]);}
+               
+               if(i == v0){
+                   printf(" %d -> ",v0);
+               }else{
+                show_path(i,previous);
+               }
+               printf("\n");
             }
         }
 
@@ -100,7 +105,7 @@ class Graph{
             
             for(i=0;i<this->size;i++)
             {
-                dist[i] = INT16_MAX;
+                dist[i] = INT_MAX;
                 path[i] = -1;
             }
 
@@ -124,7 +129,7 @@ class Graph{
                 }
             }   
 
-            this->show_all_paths(v0,path);
+            this->show_all_paths(v0,path,dist);
         }
 };
 
@@ -134,6 +139,7 @@ int main()
     int i, v0,v1,v2;
     double w;
 
+    
     scanf("%d", &n_vertices);
     scanf("%d", &n_edges);
 
