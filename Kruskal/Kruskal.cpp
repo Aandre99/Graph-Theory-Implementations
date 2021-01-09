@@ -68,9 +68,9 @@ int main()
 		g.create_edge(v1, v2, cost);
 	}
 	vector<Edge> mst = g.kruskal();
+	sort(mst.begin(), mst.end());
 
 	int minimum_cost = 0;
-	sort(mst.begin(), mst.end());
 
 	for(int i = 0; i < mst.size(); ++i)
 	{
