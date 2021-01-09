@@ -1,8 +1,32 @@
+/*
+	
+	Implementação do algoritmo de Kruskal
+
+	Entrada:
+		Um grafo não direcionado e com peso nas arestas.
+
+		Formato da entrada:
+		Dois inteiros n, m, representando a quantidade de vértices e arestas do grafo, respectivamente.
+		Em seguida m linhas contendo três inteiros v1, v2, c, representando a aresta v1v2 com peso c.
+
+
+	Saída:
+		Gera uma árvore geradora mínima (MST) do grafo recebido.
+
+		Formato da saída:
+		n-1 linhas contendo cada aresta da MST:
+		v1 			v2 			Peso
+		Em seguida o custo mínimo da árvore geradora.
+
+*/
+
 #include <iostream>
 #include <algorithm>
 #include <vector>
 
 using namespace std;
+
+typedef vector<int> children;
 
 class Edge
 {
@@ -34,6 +58,7 @@ public:
 	vector<Edge> kruskal();
 };
 
+
 int main()
 {
 	int qnt_vertex, qnt_edges, v1, v2, cost;
@@ -45,19 +70,21 @@ int main()
 		g.create_edge(v1, v2, cost);
 	}
 	vector<Edge> mst = g.kruskal();
-	cout << "\nThe generator tree is:\n\n";
+
 	int minimum_cost = 0;
-	for(int i = 0; i < qnt_vertex-1; ++i)
+	sort(mst.begin(), mst.end());
+
+	for(int i = 0; i < mst.size(); ++i)
 	{
 		printf("%d\t%d\t\t%d\n", mst[i].get_vertex1(), mst[i].get_vertex2(), 
 				mst[i].get_cost());
 		minimum_cost += mst[i].get_cost();
 	}
-	cout << "\nThe minimum cost of generator tree is: " << minimum_cost
-		<< endl << endl;
+	cout << endl << minimum_cost << endl << endl;
 
 	return 0;
 }
+
 
 Edge::Edge(int vertex1, int vertex2, int cost)
 {
@@ -87,7 +114,7 @@ int Edge::get_cost()
 
 bool Edge::operator < (const Edge &edge2)
 {
-	return (cost < edge2.cost);
+	return (vertex1 < edge2.vertex1);
 }
 
 Graph::Graph(int qnt_vertex)
@@ -123,6 +150,21 @@ void Graph::unite(int subset[], int vertex1, int vertex2)
 	subset[vertex1_set] = vertex2_set;
 }
 
+void sort_edge(vector<Edge> &v)
+{
+	int size = v.size();
+	for(int i = 0; i < size; ++i)
+	{
+		for(int j = size-1; j > i; --j)
+		{
+			if(v[i].get_cost() > v[j].get_cost())
+			{
+				swap(v[i], v[j]);
+			}
+		}
+	}
+}
+
 vector<Edge> Graph::kruskal()
 {
 	vector<Edge> mst;
@@ -133,9 +175,9 @@ vector<Edge> Graph::kruskal()
 		subset[i] = -1;
 	}
 	
-	sort(this->edges.begin(), this->edges.end());
+	sort_edge(this->edges);
 
-	for(int i = 0; i < edges.size(); i++)
+	for(int i = 0; i < this->qnt_edges; i++)
 	{
 		int vertex1 = search(subset, edges[i].get_vertex1());
 		int vertex2 = search(subset, edges[i].get_vertex2());
@@ -147,3 +189,4 @@ vector<Edge> Graph::kruskal()
 	}
 	return mst;
 }
+
