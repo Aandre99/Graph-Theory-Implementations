@@ -1,3 +1,25 @@
+/*  
+Para o algoritmo de Dijkstra, temos:
+
+    Entrada:
+
+        1 - n_vertices e n_edges representando o número de vértices e arestas do grafo
+        2 - n_edges linhas seguintes com 3 valores:
+            
+            v1 v2 w , onde v1 e v2 representam os vértices e w o peso contido na aresta
+            que liga estes dois vértices;
+
+        3 - begin e end, vértice inicial e final para os quais deseja-se obter o caminho
+            mínimo entre os dois;
+
+    Saída:
+
+        A saída do algoritmo segue como abaixo:
+
+            1 - custo do caminho mínimo
+            2 - caminho minimo
+*/
+
 #include <iostream>
 #include <vector>
 #include <utility>
@@ -7,13 +29,8 @@
 
 using namespace std;
 
-//definitions -> pair<vertex,distance>
-
 typedef pair<double,int> vertex;
 typedef vector<vertex> Adj;
-
-//custom comparator for order priority queue by sencond element (distance)
-//  use -> priority_queue<vertex,vector<vertex>,myComp>
 class Graph{
     private:
     
@@ -50,7 +67,7 @@ class Graph{
             }else{
 
                 show_path(prev[v],prev);
-                printf("[%d]->",v);
+                printf(" %d ->",v);
             }
         }
 
@@ -91,7 +108,7 @@ class Graph{
                     }
                 } 
             }
-            printf("Caminho com distancia minima entre %d e %d: \n", s,d);
+            printf("Distância minima %.2lf \nCaminho mínimo entre %d e %d:\n", distance[d],s,d);
             this->show_path(d,previous);
         }
 };
@@ -123,6 +140,5 @@ int main(){
     
     graph.execute_dijkstra(begin,end);  
 
-    //show_graph(graph);
     return 0;
 }
