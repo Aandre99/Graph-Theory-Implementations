@@ -1,3 +1,26 @@
+/*
+    
+    Implementação do algoritmo de Prim
+
+    Entrada:
+        Um grafo não direcionado e com peso nas arestas.
+
+        Formato da entrada:
+        Dois inteiros n, m, representando a quantidade de vértices e arestas do grafo, respectivamente.
+        Em seguida m linhas contendo dois inteiros v1, v2 e um real c, representando a aresta v1v2 com peso c.
+        E um inteiro v, o vértice escolhido para ser a raiz da MST.
+
+
+    Saída:
+        Gera uma árvore geradora mínima (MST) do grafo recebido.
+
+        Formato da saída:
+        n-1 linhas contendo cada aresta da MST:
+        v1          v2          Peso
+        Em seguida o custo mínimo da árvore geradora.
+
+*/
+
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -20,7 +43,6 @@ public:
     Graph(int n_v);
     ~Graph();
     void add_edge(int v1, int v2, double weight);
-    void show_graph();
     void execute_prim(int v_start);
 };
 
@@ -44,15 +66,13 @@ int main()
 
     cin >> v_start;
     graph.execute_prim(v_start);
-    cout << "\nThe generator tree is:\n\n";
 
     for(int i = 0; i < n_vertices; i++)
     {
         printf("%d\t%d\t\t%.2lf\n", i , previous[i], cost[i]);
         min_cost += cost[i];
     }
-
-    printf("\nThe minimum cost of generator tree is: %.lf\n\n", min_cost);
+    printf("\n%.2lf\n\n",  min_cost);
     free(previous);
     free(cost);
     
@@ -74,19 +94,6 @@ void Graph::add_edge(int v1,int v2, double weight)
 {
     this->Adj_list[v1].push_back(make_pair(weight,v2));
     this->Adj_list[v2].push_back(make_pair(weight,v1));
-}
-
-void Graph::show_graph()
-{
-    for(int i = 0; i < this->size; i++)
-    {
-        printf("[%d]", i);
-        for(vertex v: this->Adj_list[i])
-        {
-            printf(" -> (%d, %.2lf)", v.second, v.first);
-        }
-        printf("\n\n");
-    }
 }
 
 void Graph::execute_prim(int v_start)
@@ -125,5 +132,4 @@ void Graph::execute_prim(int v_start)
         }
     }
 }
-
 
