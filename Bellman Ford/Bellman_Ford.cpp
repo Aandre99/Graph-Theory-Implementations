@@ -1,5 +1,32 @@
+/*
+    Para o algoritmo de Bellman-Ford, temos:
+
+    Entrada:
+
+        1 - n_vertices e n_edges representando o número de vértices e arestas do grafo
+        2 - n_edges linhas seguintes com 3 valores:
+            
+            v1 v2 w , onde v1 e v2 representam os vértices e w o peso contido na aresta
+            que liga estes dois vértices;
+
+        3 - v0 representando o vértice inicial de onde o algoritmo partirá para encontrar
+            todos os caminhos mínimos entre v0 e os n_vertices - 1 vértices restantes,
+            caso exista caminho entre v0 e outro vértice dado;
+
+    Saída:
+
+        A saída do algoritmo segue como abaixo:
+
+            [1] Minimum Path v0 to vx:
+            [2] caminho entre v0 e vx, onde vx ⊂ V e vx ≠ v0 (com o formato v0 -> vx -> vy -> ....)
+
+        Obs:
+            Quando não existe caminho entre v0 e um vx dado a saída será:
+            v0 -> 
+*/
+
 #include <iostream>
-#include <vector>
+#include <vector> 
 #include <utility>
 #include <limits>
 #include <math.h>
@@ -121,7 +148,6 @@ int main()
 
     scanf("%d",&v0);
 
-    //graph.show_graph();
     graph.execute_Bellman_Ford(v0);
 
     return 0;
