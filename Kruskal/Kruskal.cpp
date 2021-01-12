@@ -52,7 +52,6 @@ public:
 	~Graph();
 	void create_edge(int vertex1, int vertex2, int cost);
 	int search(int subset[], int i);
-	void unite(int subset[], int vertex1, int vertex2);
 	vector<Edge> kruskal();
 };
 
@@ -141,13 +140,6 @@ int Graph::search(int subset[], int i)
 	return search(subset, subset[i]);
 }
 
-void Graph::unite(int subset[], int vertex1, int vertex2)
-{
-	int vertex1_set = search(subset, vertex1);
-	int vertex2_set = search(subset, vertex2);
-	subset[vertex1_set] = vertex2_set;
-}
-
 void sort_edge(vector<Edge> &v)
 {
 	int size = v.size();
@@ -182,7 +174,7 @@ vector<Edge> Graph::kruskal()
 		if(vertex1 != vertex2)
 		{
 			mst.push_back(edges[i]);
-			unite(subset, vertex1, vertex2);
+			subset[vertex1] = vertex2;
 		}
 	}
 	return mst;
