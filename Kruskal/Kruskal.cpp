@@ -159,6 +159,7 @@ vector<Edge> Graph::kruskal()
 {
 	vector<Edge> mst;
 	int subset[this->qnt_vertex];
+	int vertex1, vertex2;
 
 	for(int i = 0; i < this->qnt_vertex; ++i)
 	{
@@ -169,8 +170,8 @@ vector<Edge> Graph::kruskal()
 
 	for(int i = 0; i < this->qnt_edges; i++)
 	{
-		int vertex1 = search(subset, edges[i].get_vertex1());
-		int vertex2 = search(subset, edges[i].get_vertex2());
+		vertex1 = search(subset, edges[i].get_vertex1());
+		vertex2 = search(subset, edges[i].get_vertex2());
 		if(vertex1 != vertex2)
 		{
 			mst.push_back(edges[i]);
