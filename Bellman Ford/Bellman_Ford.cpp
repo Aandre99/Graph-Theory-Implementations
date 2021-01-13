@@ -149,8 +149,8 @@ void Graph::execute_Bellman_Ford(int v0)
                 if(dist[v.first] > dist[j] + v.second)
                 {
                     negative_cycle = true;
-                    printf("Negative Cycle found!");
-                    break;
+                    cout<< "\nNegative Cycle found!\n";
+                    return;
                 }
             }
         }
@@ -158,4 +158,3 @@ void Graph::execute_Bellman_Ford(int v0)
         show_all_paths(v0, path,dist);
     }
 }
-
