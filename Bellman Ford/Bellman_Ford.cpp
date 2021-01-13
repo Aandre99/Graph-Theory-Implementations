@@ -114,6 +114,7 @@ void Graph::execute_Bellman_Ford(int v0)
 {
     double dist[this->size];
     int path[this->size];
+    bool negative_cycle = 0;
 
     for(int i = 0; i < this->size; i++)
     {
@@ -139,6 +140,24 @@ void Graph::execute_Bellman_Ford(int v0)
             }
         }
     }
-    show_all_paths(v0, path,dist);
+
+    for(int j = 0; j < this->size; j++)
+        {
+            for(int k = 0; k < this->Adj_list[j].size(); k++)
+            {
+                vertex v = this->Adj_list[j][k];
+                if(dist[v.first] > dist[j] + v.second)
+                {
+                    negative_cycle = true;
+                    printf("Negative Cycle found!");
+                    return;
+                }
+            }
+        }
+    if (!negative_cycle){
+        show_all_paths(v0, path,dist);
+    }else{
+        printf("")
+    }
 }
 
