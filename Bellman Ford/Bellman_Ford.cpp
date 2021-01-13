@@ -150,14 +150,12 @@ void Graph::execute_Bellman_Ford(int v0)
                 {
                     negative_cycle = true;
                     printf("Negative Cycle found!");
-                    return;
+                    break;
                 }
             }
         }
     if (!negative_cycle){
         show_all_paths(v0, path,dist);
-    }else{
-        printf("")
     }
 }
 
