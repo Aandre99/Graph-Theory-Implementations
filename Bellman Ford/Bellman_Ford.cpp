@@ -114,7 +114,7 @@ void Graph::execute_Bellman_Ford(int v0)
 {
     double dist[this->size];
     int path[this->size];
-    bool negative_cycle = 0;
+    bool negative_cycle = false;
 
     for(int i = 0; i < this->size; i++)
     {
